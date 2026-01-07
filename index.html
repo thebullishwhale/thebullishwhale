@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>$BULLWHALE</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-animation">
+                <div class="loader-dot"></div>
+                <div class="loader-dot"></div>
+                <div class="loader-dot"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="background-text"></div>
+
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">THE BULLISH WHALE</div>
+            <div class="nav-links">
+                <a href="#home">BUY</a>
+                <a href="#about">ABOUT</a>
+                <a href="#contract">CONTRACT</a>
+                <a href="https://x.com/i/communities/2007268387072725251" target="_blank" rel="noopener noreferrer" class="nav-x-link" title="X (Twitter)">
+                    <svg class="x-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="currentColor"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-top">
+                <div class="hero-image">
+                    <img src="1.jpg" alt="The Bullish Whale">
+                </div>
+                <div class="hero-title-section">
+                    <h1 class="hero-title">
+                        <span class="title-line">THE</span>
+                        <span class="title-main">BULLISH</span>
+                        <span class="title-main">WHALE</span>
+                    </h1>
+                    <div class="hero-stats">
+                        <div class="hero-stat-item">
+                            <div class="hero-stat-label">MARKET CAP</div>
+                            <div class="hero-stat-value" id="marketCap">$0</div>
+                        </div>
+                        <div class="hero-stat-item">
+                            <div class="hero-stat-label">PRICE</div>
+                            <div class="hero-stat-value" id="price">$0.00</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-bottom">
+                <p class="hero-description">
+                    $BULLWHALE are the whales that move markets. Join the momentum, accumulate gains, and watch it rally.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" id="buyBtn">BUY $BULLWHALE</button>
+                    <button class="btn btn-secondary" id="chartBtn">VIEW CHART</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">WHAT IS THE BULLISH WHALE</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="2.jpg" alt="The Bullish Whale">
+                </div>
+                <div class="about-text-wrapper">
+                    <p class="about-text">
+                        THE BULLISH WHALE is a token about whales that move the market. It shows consistent unusual activity and the community is united and set on glitching the price up, together building momentum and keeping the rally going.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contract" class="contract">
+        <div class="container">
+            <h2 class="section-title">CONTRACT ADDRESS</h2>
+            <div class="contract-content">
+                <div class="contract-wrapper">
+                    <div class="contract-address" id="contractAddress">
+                        6gH5aqXWb3nmDvYvFRCQv9L3eBhr9jhVN911cCxCpump
+                    </div>
+                    <button class="btn-copy" id="copyBtn">
+                        <span>COPY</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="https://x.com/i/communities/2007268387072725251" target="_blank" rel="noopener noreferrer" class="footer-x-link" title="X (Twitter)">
+                        <svg class="x-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="currentColor"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="footer-text">
+                    <p>THE BULLISH WHALE</p>
+                    <p>HOLD = PUMP.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

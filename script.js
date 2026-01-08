@@ -263,7 +263,26 @@ function createBackgroundText() {
     backgroundText.innerHTML = '';
     
     const viewportWidth = window.innerWidth;
+    const navbar = document.querySelector('.navbar');
+    const navbarHeight = navbar ? navbar.offsetHeight : (viewportWidth <= 479 ? 60 : viewportWidth <= 767 ? 70 : 90);
+    const footer = document.querySelector('.footer');
+    const footerHeight = footer ? footer.offsetHeight : 0;
     const viewportHeight = window.innerHeight;
+    const documentHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight, viewportHeight);
+    const paddingOffset = viewportWidth >= 768 ? 30 : 20;
+    const bottomPaddingOffset = viewportWidth >= 768 ? 30 : 20;
+    
+    const containerHeight = documentHeight - navbarHeight - footerHeight - paddingOffset - bottomPaddingOffset;
+    
+    backgroundText.style.position = 'fixed';
+    backgroundText.style.top = `${navbarHeight + paddingOffset}px`;
+    backgroundText.style.left = '0';
+    backgroundText.style.right = '0';
+    backgroundText.style.width = '100%';
+    backgroundText.style.height = `${containerHeight}px`;
+    backgroundText.style.maxHeight = `${containerHeight}px`;
+    backgroundText.style.overflow = 'hidden';
+    backgroundText.style.clipPath = 'none';
     
     let fontSize;
     if (viewportWidth >= 1440) {
@@ -309,25 +328,44 @@ function createBackgroundText() {
     const bufferCols = viewportWidth >= 768 ? 3 : 2;
     const cols = viewportCols + (animationCols * 2) + (bufferCols * 2);
     
-    const rowBuffer = viewportWidth >= 768 ? 2 : 1;
-    const rows = Math.ceil(viewportHeight / verticalSpacing) + rowBuffer;
+    const maxContentHeight = containerHeight;
+    const rowBuffer = 0;
+    const maxRows = Math.ceil(maxContentHeight / verticalSpacing) + 2;
+    const rows = Math.max(1, maxRows);
     
     const startOffset = -(animationCols + bufferCols) * horizontalSpacing;
     
     const animatedElements = [];
     
+    const contentAreaHeight = containerHeight;
+    const absoluteBottom = containerHeight - bottomPaddingOffset;
+    
     for (let row = 0; row < rows; row++) {
         const rowDirection = row % 2 === 0 ? 'right' : 'left';
+        const topPosition = row * verticalSpacing;
+        const bottomPosition = topPosition + elementHeight;
+        
+        if (bottomPosition > absoluteBottom) {
+            break;
+        }
+        
+        if (topPosition < 0 || topPosition >= absoluteBottom) {
+            continue;
+        }
         
         for (let col = 0; col < cols; col++) {
             const span = document.createElement('span');
             span.textContent = '$BULLWHALE';
             span.style.fontSize = fontSize;
             const left = startOffset + col * horizontalSpacing;
-            const top = row * verticalSpacing;
             
             span.style.left = `${left}px`;
-            span.style.top = `${top}px`;
+            span.style.top = `${topPosition}px`;
+            const remainingHeight = absoluteBottom - topPosition;
+            if (remainingHeight > 0 && remainingHeight < elementHeight) {
+                span.style.maxHeight = `${remainingHeight}px`;
+                span.style.overflow = 'hidden';
+            }
             
             span.style.willChange = 'transform';
             span.style.backfaceVisibility = 'hidden';
@@ -402,6 +440,27 @@ window.addEventListener('resize', debounce(() => {
         }, 500);
     }
 }, 300));
+
+window.addEventListener('scroll', debounce(() => {
+    const backgroundText = document.querySelector('.background-text');
+    if (backgroundText) {
+        const viewportWidth = window.innerWidth;
+        const navbar = document.querySelector('.navbar');
+        const navbarHeight = navbar ? navbar.offsetHeight : (viewportWidth <= 479 ? 60 : viewportWidth <= 767 ? 70 : 90);
+        const footer = document.querySelector('.footer');
+        const footerHeight = footer ? footer.offsetHeight : 0;
+        const viewportHeight = window.innerHeight;
+        const documentHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight, viewportHeight);
+        const paddingOffset = viewportWidth >= 768 ? 30 : 20;
+        const bottomPaddingOffset = viewportWidth >= 768 ? 30 : 20;
+        const containerHeight = documentHeight - navbarHeight - footerHeight - paddingOffset - bottomPaddingOffset;
+        backgroundText.style.top = `${navbarHeight + paddingOffset}px`;
+        backgroundText.style.height = `${containerHeight}px`;
+        backgroundText.style.maxHeight = `${containerHeight}px`;
+        backgroundText.style.overflow = 'hidden';
+        backgroundText.style.clipPath = 'none';
+    }
+}, 100));
 
 setupOverlayScrollbar();
 
@@ -534,5 +593,6 @@ function createFirefoxCustomScrollbar() {
     window.addEventListener('resize', updateScrollbar);
     updateScrollbar();
 }
+
 
 console.log('%c🐋 THE BULLISH WHALE 🐋', 'color: #00ff88; font-size: 20px; font-weight: bold;');
